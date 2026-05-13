@@ -10,17 +10,17 @@ courses = [
 ]
 next_id = 3
 
-
+#done
 @app.route('/api/health', methods=['GET'])
 def health():
     return jsonify({'status': 'ok'}), 200
 
-
+#done
 @app.route('/api/courses', methods=['GET'])
 def get_courses():
     return jsonify(courses), 200
 
-
+#done
 @app.route('/api/courses/<int:cid>', methods=['GET'])
 def get_course(cid):
     course = next((c for c in courses if c['id'] == cid), None)
@@ -28,33 +28,27 @@ def get_course(cid):
         return jsonify({'error': 'Course not found'}), 404
     return jsonify(courses), 200
 
+#TODO
 @app.route('/api/courses', methods=['POST'])
-def post_course(cid):
-    course = next((c for c in courses if c['id'] == cid), None)
-    if not course:
-        return jsonify({'error': 'course not found'}), 404
-    return jsonify(course), 200
+def post_course():
+    pass
 
-@app.route('/api/courses', methods=['POST'])
-def post_course(cid):
-    course = next((c for c in courses if c['id'] == cid), None)
-    if not course:
-        return jsonify({'error': 'course not found'}), 404
-    return jsonify(course), 200
-
-@app.route('/api/courses', methods=['PUT'])
+#TODO
+@app.route('/api/courses/<int:cid>', methods=['PUT'])
 def update_course(cid):
     course = next((c for c in courses if c['id'] == cid), None)
     if not course:
-        return jsonify({'error': 'course not found'}), 404
-    return jsonify(course), 200
+        return jsonify({'error': 'Course not found'}), 404
+    return jsonify(courses), 200
 
-@app.route('/api/courses', methods=['DELETE'])
+#TODO 
+@app.route('/api/courses/<int:cid>', methods=['DELETE'])
 def delete_course(cid):
     course = next((c for c in courses if c['id'] == cid), None)
     if not course:
-        return jsonify({'error': 'course not found'}), 404
-    return jsonify(course), 200
+        return jsonify({'error': 'Course not found'}), 404
+    courses.remove(cid)
+    return jsonify(courses), 200
 
 
 if __name__ == '__main__':
