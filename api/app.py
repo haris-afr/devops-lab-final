@@ -41,14 +41,15 @@ def update_course(cid):
         return jsonify({'error': 'Course not found'}), 404
     return jsonify(courses), 200
 
-#TODO 
+
 @app.route('/api/courses/<int:cid>', methods=['DELETE'])
-def delete_course(cid):
-    course = next((c for c in courses if c['id'] == cid), None)
-    if not course:
-        return jsonify({'error': 'Course not found'}), 404
-    courses.remove(cid)
-    return jsonify(courses), 200
+def delete_student(sid):
+    global courses
+    original_len = len(courses)
+    courses = [s for s in courses if s['id'] != sid]
+    if len(courses) == original_len:
+        return jsonify({'error': 'course not found'}), 404
+    return jsonify({'message': 'course deleted'}), 200
 
 
 if __name__ == '__main__':
