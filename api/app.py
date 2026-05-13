@@ -26,6 +26,7 @@ def get_course(cid):
         return jsonify({'error': 'Course not found'}), 404
     return jsonify(courses), 200
 
+#done
 @app.route('/api/courses', methods=['POST'])
 def post_course():
     data = request.get_json()
@@ -36,7 +37,7 @@ def post_course():
     courses.insert(data)
     return jsonify(courses), 200
 
-
+#done
 @app.route('/api/courses/<int:cid>', methods=['PUT'])
 def update_course(cid):
     course = next((c for c in courses if c['id'] == cid), None)

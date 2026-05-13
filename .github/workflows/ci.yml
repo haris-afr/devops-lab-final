@@ -1,0 +1,28 @@
+name: Courses api
+on: 
+    push: 
+        branches: [main]
+    pull_request: 
+        branches: [main]
+
+jobs:   
+    test:
+        runs-on: ubuntu-latest
+        name: pull most recent
+        uses: actions/checkout@v4
+
+        name: Install dependencies
+        run: pip install -r requirements.txt
+        
+        name: Run pytest
+        run: python3 -m pytest api/app.py
+
+    build_docker:
+        name: Build docker
+        run: docker build .
+
+        name: start container
+        run: docker run course-api
+        
+        name: curl health
+        run: curl http://127.0.0.1:5000/api/health
