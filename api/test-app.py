@@ -23,4 +23,4 @@ def test_get_course_not_found(client):
 def test_add_course(client):
     response = client.post('/api/courses',
                            json={'instructor': 'Ali', 'title': 'Abc'})
-    assert response.status_code == 200
+    assert response.status_code == 201

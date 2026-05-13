@@ -35,7 +35,7 @@ def post_course():
     data['id': next_id]
     next_id += 1
     courses.insert(data)
-    return jsonify(courses), 200
+    return jsonify(courses), 201
 
 #done
 @app.route('/api/courses/<int:cid>', methods=['PUT'])
