@@ -1,8 +1,6 @@
 from flask import Flask, request, jsonify
-from flask_cors import CORS
 
 app = Flask(__name__)
-CORS(app)
 
 courses = [
     {"id": 1, "title": "DevOps Engineering", "instructor": "Memoona Amjad"},
@@ -41,7 +39,7 @@ def update_course(cid):
         return jsonify({'error': 'Course not found'}), 404
     return jsonify(courses), 200
 
-
+#done
 @app.route('/api/courses/<int:cid>', methods=['DELETE'])
 def delete_student(cid):
     global courses
