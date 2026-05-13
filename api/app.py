@@ -26,22 +26,30 @@ def get_course(cid):
         return jsonify({'error': 'Course not found'}), 404
     return jsonify(courses), 200
 
-#TODO
 @app.route('/api/courses', methods=['POST'])
 def post_course():
-    pass
+    data = request.get_json()
+    if data['title'] == None or data['instructor'] == None:
+        return 400
+    data['id': next_id]
+    next_id += 1
+    courses.insert(data)
+    return jsonify(courses), 200
 
-#TODO
+
 @app.route('/api/courses/<int:cid>', methods=['PUT'])
 def update_course(cid):
     course = next((c for c in courses if c['id'] == cid), None)
     if not course:
-        return jsonify({'error': 'Course not found'}), 404
+        return jsonify({'error': 'course not found'}), 404
+    data = request.get_json()
+    course.update(data)
     return jsonify(courses), 200
+
 
 #done
 @app.route('/api/courses/<int:cid>', methods=['DELETE'])
-def delete_student(cid):
+def delete_course(cid):
     global courses
     original_len = len(courses)
     courses = [c for c in courses if c['id'] != cid]
