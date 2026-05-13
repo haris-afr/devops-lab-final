@@ -20,4 +20,7 @@ def test_get_course_not_found(client):
     response = client.get('/api/courses/9999')
     assert response.status_code == 404
 
-
+def test_add_course(client):
+    response = client.post('/api/courses',
+                           json={'instructor': 'Ali', 'title': 'Abc'})
+    assert response.status_code == 200
